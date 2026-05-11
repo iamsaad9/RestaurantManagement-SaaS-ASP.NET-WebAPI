@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SaadMasood\\Downloads\\ASP .NET\\DemoApplication\\DemoApplication.csproj": {}
+    "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\DemoApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SaadMasood\\Downloads\\ASP .NET\\DemoApplication\\DemoApplication.csproj": {
+    "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\DemoApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SaadMasood\\Downloads\\ASP .NET\\DemoApplication\\DemoApplication.csproj",
+        "projectUniqueName": "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\DemoApplication.csproj",
         "projectName": "DemoApplication",
-        "projectPath": "C:\\Users\\SaadMasood\\Downloads\\ASP .NET\\DemoApplication\\DemoApplication.csproj",
+        "projectPath": "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\DemoApplication.csproj",
         "packagesPath": "C:\\Users\\SaadMasood\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SaadMasood\\Downloads\\ASP .NET\\DemoApplication\\obj\\",
+        "outputPath": "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\SaadMasood\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\SaadMasood\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +50,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[10.0.7, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.7, )"
