@@ -1,4 +1,5 @@
 @DemoApplication_HostAddress = http://localhost:5171
+@DemoApplication_Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QHRlc3QuY29tIiwiZXhwIjoxNzc5MjE0NjMzLCJpc3MiOiJSZXN0YXVyYW50QXBpIiwiYXVkIjoiUmVzdGF1cmFuQXBpVXNlciJ9.QS-RO4TiHIlJh8ljhjYRiZzKIogVSRZfaWim10a7hsc
 
 POST {{DemoApplication_HostAddress}}/api/auth/register
 Content-Type: application/json
@@ -17,3 +18,7 @@ Content-Type: application/json
   "email": "test@test.com",
   "password": "test1234"
 }
+
+###
+GET {{DemoApplication_HostAddress}}/api/reservations
+Authorization: Bearer {{DemoApplication_Token}}

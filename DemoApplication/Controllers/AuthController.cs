@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,8 @@ public class AuthController : ControllerBase
         _context = context;
         _jwt = jwt;
     }
+
+
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto dto)
@@ -49,11 +53,33 @@ public class AuthController : ControllerBase
         return Ok(new { token });
     }
 
+    [Authorize]
+    [HttpPost("switch-restaurant")]
+    public async Task<IActionResult> SwitchRestaurant(SwitchRestaurantDto dto)
+    {
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+        var membership = await _context.Memberships
+        .FirstOrDefaultAsync(m => m.UserId == userId && m.RestaurantId == dto.RestaurantId);
+
+        if (membership == null)
+        {
+            return Forbid("You are not a member of this restaurant");
+        }
+
+        var user = await _context.Users.FindAsync(userId);
+
+        var token = _jwt.GenerateTenantToke(user!, membership.RestaurantId, membership.Role);
+
+        return Ok(new { token });
+    }
+
     private string Hash(string password)
     {
         using var sha = SHA256.Create();
         var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
         return Convert.ToBase64String(bytes);
     }
+
 
 }
