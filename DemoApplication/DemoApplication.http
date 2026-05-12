@@ -22,3 +22,13 @@ Content-Type: application/json
 ###
 GET {{DemoApplication_HostAddress}}/api/reservations
 Authorization: Bearer {{DemoApplication_Token}}
+
+###
+POST {{DemoApplication_HostAddress}}/api/restaurants
+Authorization: Bearer {{DemoApplication_Token}}
+Content-Type: application/json
+
+{
+  "name":"Test Restaurant",
+  "ownerId":6
+}

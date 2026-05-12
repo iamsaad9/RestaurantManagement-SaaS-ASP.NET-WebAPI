@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 [Authorize]
 public class TablesController : ControllerBase
 {
-    private readonly AppDbContext _context;
-    public TablesController(AppDbContext context)
+    private readonly ITableService _service;
+    public TablesController(ITableService service)
     {
-        _context = context;
+        _service = service;
     }
 
     [HttpPost]
@@ -19,15 +19,8 @@ public class TablesController : ControllerBase
     {
         var restaurantId = int.Parse(User.FindFirst("restuarantId")!.Value);
 
-        var table = new Table
-        {
-            RestaurantId = restaurantId,
-            TableNumber = dto.TableNumber,
-            Capacity = dto.Capacity
-        };
-
-        _context.Tables.Add(table);
-        await _context.SaveChangesAsync();
+        var table = await _service
+        .CreateTable(restaurantId, dto);
 
         return Ok(table);
     }
@@ -37,9 +30,7 @@ public class TablesController : ControllerBase
     {
         var restaurantId = int.Parse(User.FindFirst("restuarantId")!.Value);
 
-        var tables = await _context.Tables
-        .Where(t => t.RestaurantId == restaurantId)
-        .ToListAsync();
+        var tables = await _service.GetAllTables(restaurantId);
 
         return Ok(tables);
     }

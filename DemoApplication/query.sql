@@ -1,1 +1,2 @@
-DELETE FROM users;
+DELETE FROM Restaurants;
+DELETE FROM Memberships;

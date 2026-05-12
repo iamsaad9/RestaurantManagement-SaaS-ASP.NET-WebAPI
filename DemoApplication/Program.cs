@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,16 @@ builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<
     IReservationService,
     ReservationService>();
+
+builder.Services.AddScoped<
+IRestaurantService,
+RestaurantService>();
+
+builder.Services.AddScoped<
+ITableService,
+TableService>();
+
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
