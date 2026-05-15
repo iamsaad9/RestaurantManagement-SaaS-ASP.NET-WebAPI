@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "XEZyFZsc65s=",
+  "dgSpecHash": "TKA7Dm9medw=",
   "success": true,
   "projectFilePath": "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\DemoApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SaadMasood\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\SaadMasood\\.nuget\\packages\\bcrypt.net-next\\4.2.0\\bcrypt.net-next.4.2.0.nupkg.sha512",
+    "C:\\Users\\SaadMasood\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
+    "C:\\Users\\SaadMasood\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
+    "C:\\Users\\SaadMasood\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.7\\microsoft.aspnetcore.authentication.jwtbearer.10.0.7.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.7\\microsoft.aspnetcore.openapi.10.0.7.nupkg.sha512",
@@ -41,6 +45,8 @@
     "C:\\Users\\SaadMasood\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\SaadMasood\\.nuget\\packages\\npgsql\\8.0.0\\npgsql.8.0.0.nupkg.sha512",
+    "C:\\Users\\SaadMasood\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.0\\npgsql.entityframeworkcore.postgresql.8.0.0.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\sqlitepclraw.core\\2.1.6\\sqlitepclraw.core.2.1.6.nupkg.sha512",
     "C:\\Users\\SaadMasood\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
@@ -110,6 +116,18 @@
       "warningLevel": 1,
       "filePath": "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\DemoApplication.csproj",
       "libraryId": "Microsoft.Data.SqlClient",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Npgsql' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-x9vc-6hfv-hg8c",
+      "projectPath": "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\DemoApplication.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\My Work\\WebDevelopment\\ASP.NET\\RestaurantManagement-SaaS-ASP.NET-WebAPI\\DemoApplication\\DemoApplication.csproj",
+      "libraryId": "Npgsql",
       "targetGraphs": [
         "net10.0"
       ]

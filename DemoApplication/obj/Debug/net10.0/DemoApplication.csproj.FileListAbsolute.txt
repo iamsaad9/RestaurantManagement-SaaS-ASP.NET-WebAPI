@@ -331,3 +331,9 @@ C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoA
 C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\obj\Debug\net10.0\DemoApplication.pdb
 C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\obj\Debug\net10.0\DemoApplication.genruntimeconfig.cache
 C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\obj\Debug\net10.0\ref\DemoApplication.dll
+C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\bin\Debug\net10.0\FluentValidation.dll
+C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\bin\Debug\net10.0\FluentValidation.AspNetCore.dll
+C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\bin\Debug\net10.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\bin\Debug\net10.0\Npgsql.dll
+C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\My Work\WebDevelopment\ASP.NET\RestaurantManagement-SaaS-ASP.NET-WebAPI\DemoApplication\bin\Debug\net10.0\BCrypt-Net-Next.dll

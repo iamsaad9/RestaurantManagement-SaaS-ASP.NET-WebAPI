@@ -13,6 +13,7 @@ public class ReservationService : IReservationService
         int restaurantId,
         CreateReservationDto dto)
     {
+        Console.WriteLine("CREATE RESERVATION DATA: ", restaurantId, dto);
         var table = await _context.Tables
             .FirstOrDefaultAsync(t =>
                 t.Id == dto.TableId &&
@@ -50,11 +51,29 @@ public class ReservationService : IReservationService
     }
 
     public async Task<List<Reservation>> GetReservation(
-        int restaurantId)
+        int restaurantId, ReservationQueryDto query)
     {
-        return await _context.Reservations
-            .Include(r => r.Table)
-            .Where(r => r.RestaurantId == restaurantId)
+        IQueryable<Reservation> reservationQuery = _context.Reservations
+        .Include(r => r.Table)
+        .Where(r => r.RestaurantId == restaurantId);
+
+        //Query Filteration
+        if (!string.IsNullOrWhiteSpace(query.CustomerName))
+        {
+            reservationQuery = reservationQuery.Where(r =>
+            r.CustomerName.ToLower()
+            .Contains(query.CustomerName.ToLower()));
+        }
+
+        //Table Filter
+        if (query.TableId.HasValue)
+        {
+            reservationQuery = reservationQuery.Where(r =>
+            r.TableId == query.TableId.Value);
+        }
+
+
+        return await reservationQuery
             .ToListAsync();
     }
 }

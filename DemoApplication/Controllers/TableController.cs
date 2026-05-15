@@ -14,11 +14,11 @@ public class TablesController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> Create(CreateTableDto dto)
     {
-        var restaurantId = int.Parse(User.FindFirst("restuarantId")!.Value);
-
+        var restaurantId = int.Parse(User.FindFirst("restaurantId")!.Value);
+        Console.WriteLine("Restaurant ID: ", restaurantId);
         var table = await _service
         .CreateTable(restaurantId, dto);
 

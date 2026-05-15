@@ -12,7 +12,7 @@ public class JwtService
         _config = config;
     }
 
-    public string GenerateToke(User user)
+    public string GenerateToken(User user)
     {
         var claims = new[]
         {
@@ -37,7 +37,7 @@ public class JwtService
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    public string GenerateTenantToke(User user, int restaurantId, string role)
+    public string GenerateTenantToken(User user, int restaurantId, string role)
     {
         var claims = new[]
         {

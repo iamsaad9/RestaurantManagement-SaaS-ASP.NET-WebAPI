@@ -6,6 +6,7 @@ public interface IReservationService
     );
 
     Task<List<Reservation>> GetReservation(
-        int restaurantId
+        int restaurantId,
+        ReservationQueryDto query
     );
 }

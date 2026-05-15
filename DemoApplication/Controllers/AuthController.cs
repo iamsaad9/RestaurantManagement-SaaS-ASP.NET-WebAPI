@@ -30,7 +30,9 @@ public class AuthController : ControllerBase
         {
             Email = dto.Email,
             Name = dto.Name,
-            PasswordHash = Hash(dto.Password)
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(
+    dto.Password
+)
         };
 
         _context.Users.Add(user);
@@ -45,10 +47,13 @@ public class AuthController : ControllerBase
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
 
 
-        if (user == null || user.PasswordHash != Hash(dto.Password))
+        if (user == null || !BCrypt.Net.BCrypt.Verify(
+    dto.Password,
+    user.PasswordHash
+))
             return Unauthorized("Invalid credentials");
 
-        var token = _jwt.GenerateToke(user);
+        var token = _jwt.GenerateToken(user);
 
         return Ok(new { token });
     }
@@ -69,17 +74,9 @@ public class AuthController : ControllerBase
 
         var user = await _context.Users.FindAsync(userId);
 
-        var token = _jwt.GenerateTenantToke(user!, membership.RestaurantId, membership.Role);
+        var token = _jwt.GenerateTenantToken(user!, membership.RestaurantId, membership.Role);
 
         return Ok(new { token });
     }
-
-    private string Hash(string password)
-    {
-        using var sha = SHA256.Create();
-        var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-        return Convert.ToBase64String(bytes);
-    }
-
 
 }

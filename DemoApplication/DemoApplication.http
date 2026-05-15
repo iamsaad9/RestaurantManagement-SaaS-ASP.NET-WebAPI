@@ -1,6 +1,8 @@
 @DemoApplication_HostAddress = http://localhost:5171
-@DemoApplication_Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QHRlc3QuY29tIiwiZXhwIjoxNzc5MjE0NjMzLCJpc3MiOiJSZXN0YXVyYW50QXBpIiwiYXVkIjoiUmVzdGF1cmFuQXBpVXNlciJ9.QS-RO4TiHIlJh8ljhjYRiZzKIogVSRZfaWim10a7hsc
+@DemoApplication_Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QHRlc3QuY29tIiwiZXhwIjoxNzc5MzgwNTM2LCJpc3MiOiJSZXN0YXVyYW50QXBpIiwiYXVkIjoiUmVzdGF1cmFudEFwaVVzZXIifQ.beo2f12G10YxEuWbIHLIiwazn39hbqwr-uUNqPCU_tw
+@DemoApplication_Tanent_Token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QHRlc3QuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJyZXN0YXVyYW50SWQiOiIxIiwiZXhwIjoxNzc5Mzg2ODk4LCJpc3MiOiJSZXN0YXVyYW50QXBpIiwiYXVkIjoiUmVzdGF1cmFudEFwaVVzZXIifQ.SBGPKBTo7xMHcwKVwd183QT5_PhSJldK-AXBSXggwbU
 
+//Authentication
 POST {{DemoApplication_HostAddress}}/api/auth/register
 Content-Type: application/json
 
@@ -20,15 +22,54 @@ Content-Type: application/json
 }
 
 ###
-GET {{DemoApplication_HostAddress}}/api/reservations
+POST {{DemoApplication_HostAddress}}/api/auth/switch-restaurant
 Authorization: Bearer {{DemoApplication_Token}}
+Content-Type: application/json
+
+{
+  "restaurantId": 1
+}
+###
+
+// Reservations
+
+GET {{DemoApplication_HostAddress}}/api/1/reservations
+Authorization: Bearer {{DemoApplication_Tanent_Token}}
 
 ###
+POST {{DemoApplication_HostAddress}}/api/1/reservations
+Authorization: Bearer {{DemoApplication_Token}}
+Content-Type: application/json
+
+{
+  "tableId": 1,
+  "customerName": "Test Customer",
+  "startTime": "2026-07-15T14:30:05Z",
+  "endTime": "2026-07-15T16:30:05Z"
+}
+
+###
+
+// Restaurants
 POST {{DemoApplication_HostAddress}}/api/restaurants
 Authorization: Bearer {{DemoApplication_Token}}
 Content-Type: application/json
 
 {
   "name":"Test Restaurant",
-  "ownerId":6
+  "ownerId":1
 }
+
+###
+
+// Tables
+
+POST {{DemoApplication_HostAddress}}/api/table
+Authorization: Bearer {{DemoApplication_Tanent_Token}}
+Content-Type: application/json
+
+{
+  "TableNumber":521,
+  "Capacity":5
+}
+

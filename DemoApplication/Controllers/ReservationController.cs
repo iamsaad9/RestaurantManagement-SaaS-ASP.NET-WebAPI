@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/reservations")]
+[Route("api/{restaurantId}/reservations")]
 [Authorize]
 public class ReservationsController : ControllerBase
 {
@@ -17,10 +17,11 @@ public class ReservationsController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> Create(
+        int restaurantId,
         CreateReservationDto dto
     )
     {
-        var restaurantId = int.Parse(User.FindFirst("restaurantId")!.Value);
+        // var restaurantId = int.Parse(User.FindFirst("restaurantId")!.Value);
 
         var reservation = await _service
         .CreateReservation(restaurantId, dto);
@@ -30,11 +31,13 @@ public class ReservationsController : ControllerBase
 
 
     [HttpGet]
-    public async Task<IActionResult> GetAllReservations()
+    public async Task<IActionResult> GetAllReservations(
+        [FromQuery] ReservationQueryDto query
+    )
     {
         var restaurantId = int.Parse(User.FindFirst("restaurantId")!.Value);
 
-        var reservations = await _service.GetReservation(restaurantId);
+        var reservations = await _service.GetReservation(restaurantId, query);
 
         return Ok(reservations);
     }
