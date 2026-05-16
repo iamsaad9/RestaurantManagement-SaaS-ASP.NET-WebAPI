@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/{restaurantId}/reservations")]
 [Authorize]
 public class ReservationsController : ControllerBase
 {
@@ -15,13 +14,23 @@ public class ReservationsController : ControllerBase
         _service = service;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(
+    [HttpPost("api/{restaurantId}/reservations")]
+    public async Task<IActionResult> CreateReservation(
         int restaurantId,
         CreateReservationDto dto
     )
     {
-        // var restaurantId = int.Parse(User.FindFirst("restaurantId")!.Value);
+        var tenantRestaurantClaim =
+    User.FindFirst("restaurantId");
+
+        if (tenantRestaurantClaim != null)
+        {
+            var tenantRestaurantId =
+                int.Parse(tenantRestaurantClaim.Value);
+
+            if (tenantRestaurantId != restaurantId)
+                return Forbid();
+        }
 
         var reservation = await _service
         .CreateReservation(restaurantId, dto);
@@ -29,17 +38,76 @@ public class ReservationsController : ControllerBase
         return Ok(reservation);
     }
 
+    [HttpPut("api/{restaurantId}/reservations/{reservationId}")]
+    public async Task<IActionResult> UpdateReservation(
+       int restaurantId,
+       int reservationId,
+       UpdateReservationDto dto
+   )
+    {
+        var tenantRestaurantClaim =
+    User.FindFirst("restaurantId");
 
-    [HttpGet]
+        if (tenantRestaurantClaim != null)
+        {
+            var tenantRestaurantId =
+                int.Parse(tenantRestaurantClaim.Value);
+
+            if (tenantRestaurantId != restaurantId)
+                return Forbid();
+        }
+
+        var reservation = await _service
+        .UpdateReservation(restaurantId, reservationId, dto);
+
+        return Ok(reservation);
+    }
+
+    [HttpDelete("api/{restaurantId}/reservations/{reservationId}")]
+    public async Task<IActionResult> DeleteReservation(int restaurantId, int reservationId)
+    {
+        var tenantRestaurantClaim =
+    User.FindFirst("restaurantId");
+
+        if (tenantRestaurantClaim != null)
+        {
+            var tenantRestaurantId =
+                int.Parse(tenantRestaurantClaim.Value);
+
+            if (tenantRestaurantId != restaurantId)
+                return Forbid();
+        }
+
+        await _service.DeleteReservation(restaurantId, reservationId);
+
+        return Ok("Reservation deleted successfully");
+    }
+
+
+    [HttpGet("api/{restaurantId}/reservations")]
     public async Task<IActionResult> GetAllReservations(
-        [FromQuery] ReservationQueryDto query
+        [FromQuery] ReservationQueryDto query,
+        int restaurantId
     )
     {
-        var restaurantId = int.Parse(User.FindFirst("restaurantId")!.Value);
+
+        var tenantRestaurantClaim =
+    User.FindFirst("restaurantId");
+
+        if (tenantRestaurantClaim != null)
+        {
+            var tenantRestaurantId =
+                int.Parse(tenantRestaurantClaim.Value);
+
+            if (tenantRestaurantId != restaurantId)
+                return Forbid();
+        }
 
         var reservations = await _service.GetReservation(restaurantId, query);
 
         return Ok(reservations);
     }
+
+
 
 }

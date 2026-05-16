@@ -76,4 +76,69 @@ public class ReservationService : IReservationService
         return await reservationQuery
             .ToListAsync();
     }
+
+
+    public async Task<Reservation> UpdateReservation(
+    int restaurantId,
+    int reservationId,
+    UpdateReservationDto dto)
+    {
+
+        var reservation = await _context.Reservations
+            .FirstOrDefaultAsync(r =>
+                r.Id == reservationId &&
+                r.RestaurantId == restaurantId);
+
+        if (reservation == null)
+            throw new Exception("Reservation not found");
+
+        // optional: check table exists in same restaurant
+        var table = await _context.Tables
+            .FirstOrDefaultAsync(t =>
+                t.Id == dto.TableId &&
+                t.RestaurantId == restaurantId);
+
+        if (table == null)
+            throw new Exception("Invalid table");
+
+        // conflict check (exclude current reservation)
+        var conflict = await _context.Reservations
+            .AnyAsync(r =>
+                r.Id != reservationId &&
+                r.TableId == dto.TableId &&
+                r.StartTime < dto.EndTime &&
+                r.EndTime > dto.StartTime
+            );
+
+        if (conflict)
+            throw new Exception("Table already reserved during this time");
+
+        reservation.TableId = dto.TableId;
+        reservation.CustomerName = dto.CustomerName;
+        reservation.StartTime = dto.StartTime;
+        reservation.EndTime = dto.EndTime;
+
+        await _context.SaveChangesAsync();
+
+        return reservation;
+    }
+
+    public async Task DeleteReservation(
+        int restaurantId,
+        int reservationId)
+    {
+        var reservation = await _context.Reservations
+            .FirstOrDefaultAsync(r =>
+                r.Id == reservationId &&
+                r.RestaurantId == restaurantId);
+
+        if (reservation == null)
+            throw new Exception("Reservation not found");
+
+        _context.Reservations.Remove(reservation);
+
+        await _context.SaveChangesAsync();
+    }
+
 }
+

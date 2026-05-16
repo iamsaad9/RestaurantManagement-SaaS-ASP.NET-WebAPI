@@ -1,6 +1,6 @@
 @DemoApplication_HostAddress = http://localhost:5171
 @DemoApplication_Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QHRlc3QuY29tIiwiZXhwIjoxNzc5MzgwNTM2LCJpc3MiOiJSZXN0YXVyYW50QXBpIiwiYXVkIjoiUmVzdGF1cmFudEFwaVVzZXIifQ.beo2f12G10YxEuWbIHLIiwazn39hbqwr-uUNqPCU_tw
-@DemoApplication_Tanent_Token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QHRlc3QuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJyZXN0YXVyYW50SWQiOiIxIiwiZXhwIjoxNzc5Mzg2ODk4LCJpc3MiOiJSZXN0YXVyYW50QXBpIiwiYXVkIjoiUmVzdGF1cmFudEFwaVVzZXIifQ.SBGPKBTo7xMHcwKVwd183QT5_PhSJldK-AXBSXggwbU
+@DemoApplication_Tanent_Token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QHRlc3QuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJyZXN0YXVyYW50SWQiOiIyIiwiZXhwIjoxNzc5NDY0MDgwLCJpc3MiOiJSZXN0YXVyYW50QXBpIiwiYXVkIjoiUmVzdGF1cmFudEFwaVVzZXIifQ.cERnddaSxNQXhr9YbgSv2iVySHi-EfrsmtVHnRC8iVw
 
 //Authentication
 POST {{DemoApplication_HostAddress}}/api/auth/register
@@ -27,26 +27,45 @@ Authorization: Bearer {{DemoApplication_Token}}
 Content-Type: application/json
 
 {
-  "restaurantId": 1
+  "restaurantId": 2
 }
 ###
 
 // Reservations
 
-GET {{DemoApplication_HostAddress}}/api/1/reservations
-Authorization: Bearer {{DemoApplication_Tanent_Token}}
+GET {{DemoApplication_HostAddress}}/api/2/reservations
+Authorization: Bearer {{DemoApplication_Token}}
 
 ###
-POST {{DemoApplication_HostAddress}}/api/1/reservations
+POST {{DemoApplication_HostAddress}}/api/2/reservations
 Authorization: Bearer {{DemoApplication_Token}}
 Content-Type: application/json
 
 {
-  "tableId": 1,
-  "customerName": "Test Customer",
-  "startTime": "2026-07-15T14:30:05Z",
-  "endTime": "2026-07-15T16:30:05Z"
+  "tableId": 12,
+  "customerName": "Test Customer 1",
+  "startTime": "2026-08-15T14:30:05Z",
+  "endTime": "2026-08-15T16:30:05Z"
 }
+
+
+###
+PUT {{DemoApplication_HostAddress}}/api/2/reservations/4
+Authorization: Bearer {{DemoApplication_Token}}
+Content-Type: application/json
+
+{
+  "tableId": 12,
+  "customerName": "Test Customer 6",
+  "startTime": "2026-09-15T16:30:05Z",
+  "endTime": "2026-09-15T17:30:05Z"
+}
+
+###
+
+DELETE {{DemoApplication_HostAddress}}/api/2/reservations/3
+Authorization: Bearer {{DemoApplication_Token}}
+
 
 ###
 
@@ -62,14 +81,40 @@ Content-Type: application/json
 
 ###
 
+GET {{DemoApplication_HostAddress}}/api/restaurants
+Authorization: Bearer {{DemoApplication_Token}}
+
+###
+
 // Tables
 
-POST {{DemoApplication_HostAddress}}/api/table
+POST {{DemoApplication_HostAddress}}/api/tables
+Authorization: Bearer {{DemoApplication_Tanent_Token}}
+Content-Type: application/json
+
+{
+  "TableNumber":551,
+  "Capacity":5
+}
+
+###
+
+PUT {{DemoApplication_HostAddress}}/api/tables/2
 Authorization: Bearer {{DemoApplication_Tanent_Token}}
 Content-Type: application/json
 
 {
   "TableNumber":521,
-  "Capacity":5
+  "Capacity":8
 }
+
+###
+
+DELETE  {{DemoApplication_HostAddress}}/api/tables/2
+Authorization: Bearer {{DemoApplication_Tanent_Token}}
+
+###
+
+GET {{DemoApplication_HostAddress}}/api/2/tables
+Authorization: Bearer {{DemoApplication_Tanent_Token}}
 
